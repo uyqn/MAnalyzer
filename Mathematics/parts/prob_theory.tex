@@ -1,0 +1,63 @@
+\chead{Probability Theory}
+\part{Probability Theory}
+\section{Lognormal Distribution}
+\begin{definition}[Normal Distribution]
+	A Continous random variable $X$ is normally distributed $X\sim\mathcal{N}(\mu, \sigma^2)$ with mean $\mu$ and variane $\sigma^2$ if the probability density function of $X$ is
+	$$
+	f(x) = \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right)^2}
+	$$
+	for all $x\in\mathbb R$.
+\end{definition}
+Now, for stock price analysis the normal distribution is not a good model for modelling the stock market, i.e. $P_n - P_{n-1} \sim \mathcal{N}(0, 1)$ is not a good model. Instead, we want the relative difference $\dfrac{P_n - P_{n-1}}{P_n} \sim \mathcal N(0, 1)$. The question that rises is what does the distribution of $P_n$ look like? We will hence, introduce the log-normal distribution.
+\begin{definition}[Log-normal distribution]
+	Let $X$ be a continuous random variable. Then $X$ is said to be \emph{lognormal} distributed if $Y = \ln X$ is normally distributed.
+\end{definition}
+In order to derive the distribution of $Y$ we can use the theorem of change of variables that states the following:
+\begin{theorem}[Change of variable]
+	Suppose that $X$ and $Y$ are random variables with pdf $f_X$ and $f_Y$ respectively, such that $P(X \leq x) = P(Y \leq h(x))$ for all $x$ then
+	$$
+	f_X(x) = \left(f_Y\circ h\right)(x)\frac{dh}{dx}
+	$$
+	\begin{proof}
+		Consider the cumulative distribution $F_X(x) = F_Y(h(x))$. The proof then follows from the fundamental theorem of calculus that $f_X(x) = f_Y(h(x))h'(x)$.
+	\end{proof}
+\end{theorem}
+From the proceeding definition if we let $X\sim\mathrm{Lognormal}(\mu, \sigma^2)$ and $Y = \ln X \sim\mathcal{N}(\mu,\sigma^2)$. Then by the proceeding theorem we have that
+$$
+f_X(x) = \frac{1}{x}f_Y(\ln(x)) = \frac{1}{\sigma\sqrt{2\pi}x}e^{-\frac{1}{2}\left(\frac{\ln(x)-\mu}{\sigma}\right)^2}
+$$
+Now that we have the pdf of $X$ it is natural to ask what $\expected$ and $\variance$ are respectively. Before we do that, it would be easier to derive $\expected$ and $\variance$ if we first introduce the moment generating function and investigate some of its properties first.
+\begin{definition}[Moment generating function]
+	Let $X$ be a random variable. Then the moment generating function (mgf) of $X$ is $M_X(t) = \expected[e^{tX}]$.
+\end{definition}
+\begin{theorem}
+	Let $X\sim \mathcal{N}(\mu,\sigma^2)$ then
+	$$
+	M_X(t) = e^{t\mu + \frac{1}{2}\sigma^2t^2}
+	$$
+	\begin{proof}
+		From the definition we have that
+		$$
+		M_X(t) = \expected[e^{tX}] = \frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^\infty e^{tx}e^{-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right)^2}dx
+		$$
+		expanding the square gives us
+		\begin{align*}
+		tx - \frac{1}{2}\left(\frac{x - \mu}{\sigma}\right)^2 &= -\frac{x^2 - 2\mu x - 2\sigma^2tx + \mu^2}{2\sigma^2}\\
+		&= - \frac{x^2 - 2(\mu + \sigma^2t)x + \mu^2 + (\mu + \sigma^2t)^2 - (\mu + \sigma^2t)^2}{2\sigma^2}\\
+		&= - \frac{1}{2}\left(\frac{x - (\mu + \sigma^2t)}{\sigma}\right)^2 - \frac{\mu^2 - (\mu + \sigma^2t)^2}{2\sigma^2}\\
+		&= - \frac{1}{2}\left(\frac{x - (\mu + \sigma^2t)}{\sigma}\right)^2 + \mu t + \frac{1}{2}\sigma^2 t^2
+		\end{align*}
+		Hence,
+		$$
+		M_X(t) = e^{\mu t + \frac{1}{2}\sigma^2 t^2}\cdot \frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{\infty}e^{- \frac{1}{2}\left(\frac{x - (\mu + \sigma^2t)}{\sigma}\right)^2} dx
+		$$
+		Since,
+		$$
+		\int_{-\infty}^{\infty}e^{- \frac{1}{2}\left(\frac{x - (\mu + \sigma^2t)}{\sigma}\right)^2} dx = \sqrt{2\pi}\sigma
+		$$
+		We have that
+		$$
+		M_X(t) = e^{\mu t + \frac{1}{2}\sigma^2 t^2}
+		$$
+	\end{proof}
+\end{theorem}

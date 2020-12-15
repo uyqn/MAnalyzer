@@ -1,0 +1,74 @@
+\chead{Linear Algebra}
+\part{Linear Algebra}
+\section{Linear transformation}
+\begin{definition}[Linear transformation]
+	Let $V$ and $W$ be a vector spaces over some field $\mathbb F$. Then a function $T\colon V\to W$ is a \emph{linear transformation} if 
+	$$
+	T(a\vec{v} + b\vec{u}) = aT(\vec{v}) + bT(\vec{u})
+	$$
+\end{definition}
+Hence, for an $m\times n$ matrix $A$. We have that $A$ defines a linear transformation from $\mathbb R^n$ to $\mathbb R^m$, written as $A\colon\mathbb R^n \to \mathbb R^m$. That is, for any $\vec{v}\in\mathbb R^n$ there exists an $\vec{u}\in\mathbb R^m$ such that $A\vec{v} = \vec{u}$ is satisfied and the property of linearity holds for any scalar from $\mathbb R$.
+
+\section{Diagonalization}
+\subsection{Eigenvalues and eigenvectors}
+\begin{definition}
+	Let $A$ be an $n\times n$-matrix, $\lambda \in \mathbb C$ and $v\in V$ be a nonzero vector. Then $\lambda$ is called the \emph{eigenvalue} of $A$ and $\vec{v}$ is called the \emph{eigenvector} of $A$ if $Av = \lambda v$ holds.
+\end{definition}
+Note that we can rearrange the above condition to the following
+$$
+Av = \lambda v \iff Av - \lambda v = 0 \iff \left(A - \lambda I\right)v = 0
+$$
+Since we require $v \neq 0$ it must be true that $A - \lambda I = 0$. It follows that the matrix $A - \lambda I$ is not invertible because $0$ is not invertible. It must also holds that $\det\left(A - \lambda I\right) = 0$.
+\begin{definition}[Characteristic equation]
+	Let $A$ be an $n\times n$ matrix. Then $\det\left(A - \lambda I\right) = 0$ is called the \emph{characteristic equation} of $A$.
+\end{definition}
+\begin{theorem}
+	Let $A$ be an $n\times n$-matrix. Then $\det\left(A - \lambda I\right)$ is a polynomial of degree $n$.
+	\begin{proof}
+		By evaluating the first term of $\det\left(A - \lambda I \right)$ with the cofactor expansion, we obtain that
+		$$
+		\det\left(A - \lambda I \right) = \left[\prod_{i = 1}^n (a_{(i,i)} - \lambda)\right] + q(\lambda)
+		$$
+		It is clear here that the cofactor expansion yields a polynomial of degree $n$.
+	\end{proof}
+\end{theorem}
+\begin{corollary}
+	Let $A$ be an $n\times n$-matrix. Then $A$ has $n$ eigenvalues.
+	\begin{proof}
+		By the proceeding theorem, since $\det(A - \lambda I)$ is an polynomial of $n$-degree. It follows from the fundamental theorem of algebra that $\det(A - \lambda I)$ has $n$ solutions, i.e. $n$ eigenvalues.
+	\end{proof}
+\end{corollary}
+We will not prove the fundamental theorem of algebra as that would require deeper knowledge in abstract algebra which is very redundant for the purpose of this paper. It also follows from the fundamental theorem of algebra that roots of the characteristic equation are elements of the set of complex numbers.
+\begin{definition}[Similarity]
+	Let $A$ and $B$ be two matrices. If there exists an invertible matrix $P$ such that $B = P^{-1} AP$ then  $A$ and $B$ are called \emph{similar}.
+\end{definition}
+\begin{definition}[Diagonalizable]
+	Let $A$ be an $n\times n$-matrix and let $D$ be a diagonal $n\times n$-matrix. If $A$ and $D$ are similar then we say that $A$ is \emph{diagonalizable}.
+\end{definition}
+\begin{theorem}
+	Let $A$ be an $n\times n$-matrix. Then $A$ is diagonalizable if and only if $A$ has $n$-linearly independent eigenvectors.
+	\begin{proof}
+		Let $P$ be the matrix given by
+		$$
+		P = \begin{pmatrix}
+			| & | & & |\\
+			v_1 & v_2 & \cdots & v_n\\
+			| & | & & |
+		\end{pmatrix}
+		$$
+		and let the diagonal matrix $D$ be
+		$$
+		D = \begin{pmatrix}
+			\lambda_1 & 0 & \cdots & 0\\
+			0 & \lambda_2 & \cdots & 0\\
+			\vdots & \vdots & \ddots & 0\\
+			0 & 0 & \cdots & \lambda_n
+		\end{pmatrix}
+		$$
+		where $\lambda_i$ is the $i$-th eigenvalue of $A$ and $v_i$ is the corresponding eigenvector of $A$. It is easy to see that since $Av = \lambda v$. We can compactly express $A$ as $AP = PD$. It follows that $P$ is invertible if and only if the eigenvectors are linearly independent. Thus, if this is the case $A$ is diagonalizable $A = PDP^{-1}$.
+	\end{proof}
+\end{theorem}
+
+
+
+\clearpage

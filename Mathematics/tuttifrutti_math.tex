@@ -1,0 +1,56 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc,url}
+\usepackage{babel,textcomp}
+\usepackage{amsmath,amsfonts,amssymb,amscd,amsthm,xspace}
+\usepackage{polynom}
+\usepackage[parfill]{parskip}
+% ------------------------------------------------------------
+% Side formatering
+\usepackage{fancyhdr}
+\lhead{Financial Mathematics}
+\rhead{Uy Quoc Nguyen}
+\usepackage{lastpage}
+\cfoot{Page \thepage}
+% ------------------------------------------------------------
+% ------------------------------------------------------------
+% \theoremstyle{plain}
+\newtheorem{example}{Example}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{axiom}[theorem]{Axiom}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+% ------------------------------------------------------------
+
+% ------------------------------------------------------------
+% Egne kommandoer for matematiske uttrykk:
+\newcommand{\variance}[1][X]{\mathrm{Var}\left(#1\right)}
+\newcommand{\expected}[1][X]{\mathrm{E}\left(#1\right)}
+% ------------------------------------------------------------
+
+\title
+{
+	Project TuttiFrutti\\
+	Financial Mathematics
+}
+\author{Uy Quoc Nguyen}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	\pagenumbering{gobble}
+	\clearpage
+	\setcounter{tocdepth}{0}
+	\tableofcontents
+	\clearpage
+	\pagestyle{fancy}
+	\pagenumbering{arabic}
+	\input{./parts/linear_algebra}
+	\input{./parts/prob_theory}
+\end{document}
